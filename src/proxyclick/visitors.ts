@@ -1,7 +1,16 @@
+import axios from "axios";
+import { access_token } from "./auth";
+import { BASE, COMPANY_ID } from "../config/config";
+
 export interface IVisitor {
   firstname: string;
   lastname: string;
   email: string;
+}
+
+export interface Filter {
+  email: string;
+  companyName: string;
 }
 
 export const VisitorsService = {
@@ -14,8 +23,18 @@ export const VisitorsService = {
     email?: string;
     companyName?: string;
   }): Promise<any[]> {
-    // TODO : Write the body of this function that will call the Proxyclick API to search visitors based on email
-    return [];
+    let token = await access_token();
+
+    const result = await axios.get(
+      `${BASE}/v1/companies/${COMPANY_ID}/vm/visitors`,
+      {
+        params: filter,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return result.data.visitors;
   },
 
   // Do not change this function
