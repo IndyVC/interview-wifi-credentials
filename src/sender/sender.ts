@@ -3,10 +3,23 @@ import { EmailSender } from "./email-sender";
 
 export class Sender {
   static async sendMessage(credentials: ICredentials, recipient: string) {
-    // TODO: write the content of this function that will send the credentials to a recipient.
-    // It should use the EmailSender class as a dummy email sender
-    // If the email sender throw an exception, it should retry exactly 4 times with 5 second interval, then stop retrying
+    let retries = 0;
+    let retry;
 
-    await EmailSender.sendEmail("...", "...");
+    async function email() {
+      if (retries === 4) {
+        clearInterval(retry);
+      } else {
+        await EmailSender.sendEmail(recipient, JSON.stringify({ credentials }));
+        retries += 1;
+      }
+    }
+
+    try {
+      await EmailSender.sendEmail(recipient, JSON.stringify({ credentials }));
+    } catch (e) {
+      //60 seconds (60000 ms) * 10 = 10 min
+      retry = setInterval(email, 60000 * 10);
+    }
   }
 }
