@@ -14,4 +14,64 @@ describe("Email sender", () => {
     expect(spy.calledWith("sending email")).to.be.true;
     spy.restore();
   });
+
+  it("Should retry to send the email 4 times, because recipient is invalid", async () => {
+    const spy = sinon.spy(console, "log");
+    const clock = sinon.useFakeTimers();
+
+    await Sender.sendMessage({ username: "test", password: "test" }, "");
+    //First
+    clock.tick(5000);
+    expect(spy.calledWith("sending email")).to.be.true;
+    clock.tick(5000);
+    expect(spy.calledWith("sending email")).to.be.true;
+    clock.tick(5000);
+    expect(spy.calledWith("sending email")).to.be.true;
+    clock.tick(5000);
+    expect(spy.calledWith("sending email")).to.be.true;
+    expect(spy.callCount).to.equal(4);
+    spy.restore();
+  });
+
+  it("Should retry to send the email 4 times, because username is invalid", async () => {
+    const spy = sinon.spy(console, "log");
+    const clock = sinon.useFakeTimers();
+
+    await Sender.sendMessage(
+      { username: "", password: "test" },
+      "indyvancanegem@hotmail.com"
+    );
+    //First
+    clock.tick(5000);
+    expect(spy.calledWith("sending email")).to.be.true;
+    clock.tick(5000);
+    expect(spy.calledWith("sending email")).to.be.true;
+    clock.tick(5000);
+    expect(spy.calledWith("sending email")).to.be.true;
+    clock.tick(5000);
+    expect(spy.calledWith("sending email")).to.be.true;
+    expect(spy.callCount).to.equal(4);
+    spy.restore();
+  });
+
+  it("Should retry to send the email 4 times, because password is invalid", async () => {
+    const spy = sinon.spy(console, "log");
+    const clock = sinon.useFakeTimers();
+
+    await Sender.sendMessage(
+      { username: "test", password: "" },
+      "indyvancanegem@hotmail.com"
+    );
+    //First
+    clock.tick(5000);
+    expect(spy.calledWith("sending email")).to.be.true;
+    clock.tick(5000);
+    expect(spy.calledWith("sending email")).to.be.true;
+    clock.tick(5000);
+    expect(spy.calledWith("sending email")).to.be.true;
+    clock.tick(5000);
+    expect(spy.calledWith("sending email")).to.be.true;
+    expect(spy.callCount).to.equal(4);
+    spy.restore();
+  });
 });

@@ -5,6 +5,7 @@
         "preserveConstEnums": true,
         "sourceMap": true,
         "outDir": "build",
+        "target": "ES2020",
         "lib": [
             "ES2015",
             "DOM"

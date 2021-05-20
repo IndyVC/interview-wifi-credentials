@@ -10,6 +10,7 @@ export interface Visitor {
   email: string;
   companyName: string;
 }
+
 /**
  * In response of a check-in event, returns a WiFi credentials object
  * @param visitorEvent the visitor event checking in
