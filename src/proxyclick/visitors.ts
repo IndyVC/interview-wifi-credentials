@@ -8,11 +8,6 @@ export interface IVisitor {
   email: string;
 }
 
-export interface Filter {
-  email: string;
-  companyName: string;
-}
-
 export const VisitorsService = {
   /**
    * Find visitors by searching through the Proxyclick API

@@ -2,6 +2,7 @@ import { IVisitor as IVisitorEvent } from "../proxyclick/visitors";
 import { VisitorsService } from "../proxyclick/visitors";
 import { CredentialsService, ICredentials } from "../proxyclick/credentials";
 import { exists, fetch, remove, store } from "../cache/cache";
+import { Sender } from "../sender/sender";
 
 export interface Visitor {
   id: string;
