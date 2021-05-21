@@ -33,7 +33,6 @@ export const checkIn = async (req: Request, res: Response) => {
   try {
     const visitor: Partial<IVisitor> = req.body;
     const credentials: ICredentials = await handleCheckin(visitor);
-    console.log(credentials);
     await Sender.sendMessage(credentials, visitor.email);
     return res.status(204).send();
   } catch (e) {

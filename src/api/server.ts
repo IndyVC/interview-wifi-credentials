@@ -1,9 +1,4 @@
-import * as express from "express";
-import visitors from "./routes/visitors";
-
-const app = express();
-app.use(express.json());
-app.use("/api", visitors);
+import app from "./app";
 
 const port = 3000;
 

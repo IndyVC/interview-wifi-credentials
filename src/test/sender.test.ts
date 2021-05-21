@@ -62,7 +62,6 @@ describe("Email sender", () => {
       { username: "test", password: "" },
       "indyvancanegem@hotmail.com"
     );
-    //First
     clock.tick(5000);
     expect(spy.calledWith("sending email")).to.be.true;
     clock.tick(5000);
