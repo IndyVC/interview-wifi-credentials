@@ -6,6 +6,6 @@ import visitors from "./routes/visitors";
  */
 const app = express();
 app.use(express.json());
-app.use("/api", visitors);
+app.use("/", visitors);
 
 export default app;
